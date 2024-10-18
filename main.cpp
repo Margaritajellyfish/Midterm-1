@@ -114,7 +114,7 @@ public:
     }
 
     void push_back(int v) {
-        Node* newNode = new Node(v);
+        Node* newNode = new Node(v);//instantializing node
         if (!tail)//empty
             head = tail = newNode;
         else {
@@ -124,7 +124,7 @@ public:
         }
     }
     
-    void push_front(int v) {
+    void push_front(int v) {//similar to above
         Node* newNode = new Node(v);
         if (!head)
             head = tail = newNode;
@@ -137,23 +137,23 @@ public:
     
     void pop_front() {
 
-        if (!head) {
-            cout << "List is empty." << endl;
+        if (!head) {//empty
+            cout << "List is //empty." << endl;
             return;
         }
 
         Node * temp = head;
 
-        if (head->next) {
-            head = head->next;
+        if (head->next) {//more than one
+            head = head->next;//move head to next
             head->prev = nullptr;
         }
         else
-            head = tail = nullptr;
-        delete temp;
+            head = tail = nullptr;//delete the only one
+        delete temp;//delete data
     }
 
-    void pop_back() {
+    void pop_back() {//similar to above
         if (!tail) {
             cout << "List is empty." << endl;
             return;
@@ -169,7 +169,7 @@ public:
         delete temp;
     }
 
-    ~DoublyLinkedList() {
+    ~DoublyLinkedList() {//deconstructor to delete nodes and prevent leaking
         while (head) {
             Node* temp = head;
             head = head->next;
@@ -178,18 +178,18 @@ public:
     }
     void print() {
         Node* current = head;
-        if (!current) {
+        if (!current) {//empty
             cout << "List is empty." << endl;
             return;
         }
-        while (current) {
+        while (current) {//print till no data
             cout << current->data << " ";
-            current = current->next;
+            current = current->next;//move forward
         }
         cout << endl;
     }
 
-    void print_reverse() {
+    void print_reverse() {//similar to above
         Node* current = tail;
         if (!current) { 
             cout << "List is empty." << endl;
@@ -201,6 +201,21 @@ public:
         }
         cout << endl;
     }
+
+    void every_other_element(){
+        Node *current = head;
+        if(!current){
+            cout << "List is empty." << endl;
+            return;
+        }
+    
+        while(current){
+            cout << current->data << " ";
+            current = current->next->next;
+        }
+        cout << endl;
+        }
+
 };
 
 int main() {
