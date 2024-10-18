@@ -63,64 +63,64 @@ public:
 
         if (!temp) return; 
 
-        if (temp->prev)//when not the first, update link
+        if (temp->prev)//when not the first, update link to skip temp
             temp->prev->next = temp->next;
         else
-            head = temp->next; 
+            head = temp->next; //if first, delete the link to first
 
         if (temp->next)
-            temp->next->prev = temp->prev;
+            temp->next->prev = temp->prev;//when not the end, update link to skip temp
         else
-            tail = temp->prev; 
+            tail = temp->prev; //if end, delete the link to end
 
-        delete temp;
+        delete temp;//the actual node delete
     }
 
     void delete_pos(int pos) {
-        if (!head) {
+        if (!head) {//nothing there
             cout << "List is empty." << endl;
             return;
         }
     
-        if (pos == 1) {
+        if (pos == 1) {//if target position is 1
             pop_front();
             return;
         }
     
         Node* temp = head;
     
-        for (int i = 1; i < pos; i++){
-            if (!temp) {
+        for (int i = 1; i < pos; i++){//else find node
+            if (!temp) {//nothing
                 cout << "Position doesn't exist." << endl;
                 return;
             }
             else
-                temp = temp->next;
+                temp = temp->next;//keep running
         }
-        if (!temp) {
+        if (!temp) {//runs out
             cout << "Position doesn't exist." << endl;
             return;
         }
     
-        if (!temp->next) {
+        if (!temp->next) {//if it's the last in list
             pop_back();
             return;
         }
     
         Node* tempPrev = temp->prev;
-        tempPrev->next = temp->next;
+        tempPrev->next = temp->next;//skip temp in link
         temp->next->prev = tempPrev;
-        delete temp;
+        delete temp;//delete node
     }
 
     void push_back(int v) {
         Node* newNode = new Node(v);
-        if (!tail)
+        if (!tail)//empty
             head = tail = newNode;
         else {
-            tail->next = newNode;
-            newNode->prev = tail;
-            tail = newNode;
+            tail->next = newNode;//link new
+            newNode->prev = tail;//link prev
+            tail = newNode;//relocate tail
         }
     }
     
