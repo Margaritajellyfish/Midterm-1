@@ -45,12 +45,12 @@ public:
         }
 
         newNode->next = temp->next;
-        newNode->prev = temp;//elsewise cut in temp position to insert newnode
-        if (temp->next)
+        newNode->prev = temp;//elsewise update newnode's two links
+        if (temp->next)//if there is a node after newnode, update the link
             temp->next->prev = newNode;
         else
-            tail = newNode;
-        temp->next = newNode;
+            tail = newNode;//else 
+        temp->next = newNode; //update the node before newnode
     }
 
     void delete_val(int value) {
@@ -59,11 +59,11 @@ public:
         Node* temp = head;
         
         while (temp && temp->data != value)
-            temp = temp->next;
+            temp = temp->next;//runing until find value or end
 
         if (!temp) return; 
 
-        if (temp->prev)
+        if (temp->prev)//when not the first, update link
             temp->prev->next = temp->next;
         else
             head = temp->next; 
