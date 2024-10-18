@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20; //define sizes as const
@@ -219,7 +220,13 @@ public:
 };
 
 int main() {
-    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
+    DoublyLinkedList ABC;
+    int length = rand() % (MAX_LS - MIN_LS + 1) + MIN_LS;
+    for(int i =0; i < length; i++){
+        ABC.push_back(rand() % (MAX_NR-MIN_NR+1) + MIN_NR);
+    }
+    ABC.print();
+    ABC.every_other_element();
 
     
     return 0;
