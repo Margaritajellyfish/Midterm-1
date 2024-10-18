@@ -1,11 +1,11 @@
 #include <iostream>
 using namespace std;
 
-const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
+const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20; //define sizes as const
 
 class DoublyLinkedList {
 private:
-    struct Node {
+    struct Node {//create node
         int data;
         Node* prev;
         Node* next;
@@ -13,39 +13,39 @@ private:
             data = val; 
             prev = p;
             next = n;
-        }
+        }//constructor that takes three inputs
     };
 
     Node* head;
-    Node* tail;
+    Node* tail;//pointers that locate first and last node
 
 public:
-    DoublyLinkedList() { head = nullptr; tail = nullptr; }
+    DoublyLinkedList() { head = nullptr; tail = nullptr; } //constructor
 
     void insert_after(int value, int position) {
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
             return;
-        }
+        }//makeing sure input is valid
 
         Node* newNode = new Node(value);
         if (!head) {
             head = tail = newNode;
             return;
-        }
+        }//when the list is empty
 
         Node* temp = head;
         for (int i = 0; i < position && temp; ++i)
-            temp = temp->next;
+            temp = temp->next;//running until the position or when out of order
 
-        if (!temp) {
+        if (!temp) {//out of order
             cout << "Position exceeds list size. Node not inserted.\n";
             delete newNode;
             return;
         }
 
         newNode->next = temp->next;
-        newNode->prev = temp;
+        newNode->prev = temp;//elsewise cut in temp position to insert newnode
         if (temp->next)
             temp->next->prev = newNode;
         else
